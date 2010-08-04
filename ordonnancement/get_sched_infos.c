@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
                 syntax(argv[0]);
 	}
 
-        if (scheduler = sched_getscheduler(pid) < 0) {
+        if ((scheduler = sched_getscheduler(pid)) < 0) {
 		perror("sched_getscheduler");
 		return EXIT_FAILURE;
 	}
@@ -50,13 +50,13 @@ int main(int argc, char* argv[])
 
         switch(scheduler) {
             case SCHED_RR:
-                printf("SCHED_RR: prio=%d, interval=%ld %ld s\n", param.sched_priority, interval.tv_sec, interval.tv_nsec);
+                printf("SCHED_RR: sched_priority=%d, interval=%ld,%09ld s\n", param.sched_priority, interval.tv_sec, interval.tv_nsec);
                 break;
             case SCHED_FIFO:
-                printf("SCHED_FIFO: prio=%d\n", param.sched_priority);
+                printf("SCHED_FIFO: sched_priority=%d\n", param.sched_priority);
                 break;
             case SCHED_OTHER:
-                printf("SCHED_OTHER: sta=%d dyn=%d\n", param.sched_priority, prio);
+                printf("SCHED_OTHER: sched_priority=%d nice=%d\n", param.sched_priority, prio);
                 break;
             default:
                 fprintf(stderr, "???\n");
