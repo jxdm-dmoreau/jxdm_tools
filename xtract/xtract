@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+
+exit 0 unless defined $ARGV[0];
+my $search = $ARGV[0];
+
+while(my $line = <STDIN>) {
+    if ($line =~ /$search(\d+)/) {
+        print $1."\n";
+    }
+}
